@@ -6,6 +6,7 @@ if platform.system() == 'Windows':
     os.system('')
 
 
+# Color manager
 class Color:
     RESET: str = '0'
     BOLD: str = '1'
@@ -53,11 +54,12 @@ class Color:
     def ansi(self, code: str) -> str:
         return '\033[' + code + 'm'
 
-    # print text with ANSI code
-    def print(self, text: str, code: str):
-        print(self.ansi(code) + text + self.ansi(self.RESET))
+    # Return color text with ANSI standard code
+    def color(self, text: str, code: str) -> str:
+        return self.ansi(code) + text
 
-    def printrgb(self, text: str, r: int, g: int, b: int, type: str = FG):
+    # Return color text with ANSI extended code
+    def colorrgb(self, text: str, r: int, g: int, b: int, type: str = FG) -> str:
         if r > 255 or r < 0:
             r = 0
 
@@ -72,4 +74,12 @@ class Color:
         else:
             code = '38;2;' + str(r) + ';' + str(g) + ';' + str(b)
 
-        print(self.ansi(code)+text+self.ansi(self.RESET))
+        return self.ansi(code) + text
+
+    # print text with ANSI code
+    def print(self, text: str, code: str):
+        print(self.ansi(code) + text + self.ansi(self.RESET))
+
+    # Print text with extended colors in RGB
+    def printrgb(self, text: str, r: int, g: int, b: int, type: str = FG):
+        print(self.colorrgb(text, r, g, b, type) + self.ansi(self.RESET))
