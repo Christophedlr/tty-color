@@ -15,6 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     keywords="console, tty, color",
     python_requires=">=3.8",
+    license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
